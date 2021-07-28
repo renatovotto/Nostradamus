@@ -1,3 +1,5 @@
+### Nostradamus
+
 In this project we will aim to use a Machine Learning model to predict the daily prices of the Tesla stock. Along with several technical indicators derived from the OHLCV data, we will feed into the model also the sentiment scores of relevant Twitter posts, thus leveraging Sentiment Analysis, a Natural Language Processing tecnique. All these data will be used to train the model which in turn will predict the trading signals.
 
 Sentiment analysis and generally the positive or negative sentiment on news about a stock has been studied in depth in the recent years, finding a strong correlation between the sentiment score of such data and the stock price movement.

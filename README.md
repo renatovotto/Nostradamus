@@ -11,7 +11,7 @@ The project leverages techniques, paradigms and data structures such as:
 - Sentiment Analysis
 - Concurrency and Parallel Processing
 - Direct Acyclic Graph (D.A.G.)
-- Data pipelines
+- Data Pipeline
 - Idempotence
 
 &nbsp;
@@ -120,10 +120,10 @@ Let me illustrate it in the steps below:
     TSLA_backtest_strategy.preprocess_data()
     ```
     
-    This method will show a summary of the data preprocessing results such as missing values, infinite values, features statistics.
+    This method will show a summary of the data preprocessing results such as missing values, infinite values and features statistics.
 
 <p>&nbsp;</p>
-From this point the program becomes interactive and the user is able to input data, save and delete files related to the training and testing of the Random Forest model, and proceed to display the strategy performances summary and graphs.
+From this point the program becomes interactive and the user is able to input data, save and delete files related to the training and testing of the Random Forest model, and proceed to display the strategy backtest summary and graphs.
 
 &nbsp;
 
@@ -133,7 +133,7 @@ From this point the program becomes interactive and the user is able to input da
     TSLA_backtest_strategy.train_model()
     ```
     
-    Here you will be able to train the model with the **scikit-learn GridSearchCV** module, and also save and delete files with the model's parameters grid and best parameters found.
+    Here you will be able to train the model with the **scikit-learn GridSearchCV**, creating your own parameters grid, save and delete files containing the parameters grid and the best set of parameters found.
 
 <p>&nbsp;</p>
 
@@ -165,7 +165,7 @@ If the required data (historical prices and Twitter posts) have been already dow
 
 This is because any downloading of new data on a significantly large period of time such to be reliable for the model training will likely require many hours, essentially due to the Twitter scraping process.
 
-That said, please be also aware that **as soon as you change the variables in the `download_params` dictionary and run the initialised `Pipeline` instance, all the existing data files will be overwritten.**. This is because the program recognise on its own the relevant data that need to be downloaded according to the parameters passed into `download_params`, and this is a deliberate choice behind the program design.
+That said, please be also aware that **as soon as you change the variables in the `download_params` dictionary and run the `Pipeline` instance, all the existing data files will be overwritten.** This is because the program recognise on its own the relevant data that need to be downloaded according to the parameters passed into `download_params`, and this is a deliberate choice behind the program design.
 
 That's all! Clone the repository and play with it. Any feedback welcome. 
 

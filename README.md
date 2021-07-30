@@ -124,7 +124,9 @@ From this point the program becomes interactive and the user is able to input da
     ```
     
     Here you will be able to train the model with the **scikit-learn GridSearchCV** module, and also save and delete files with the model's parameters grid and best parameters found.
+
 <p>&nbsp;</p>
+
 8. Call the `test_model` method on the `Backtest_Strategy` instance:
 
     ```python

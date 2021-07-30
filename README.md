@@ -15,37 +15,152 @@ The project leverages techniques, paradigms and data structures such as:
 - Idempotence
 
 &nbsp;
-
-&nbsp;
-
 ### Scope
 
 The intention behind this project was to implement the end-to-end workflow of the backtesting of an **Algorithmic Trading** strategy in a program with a sleek interface, and with a level of automation such that the user is able to tailor the details of the strategy and the output of the program by entering a minimal amount of data, partly even in an interactive way. This should make the program reusable, meaning that it's easy to carry out the backtesting of the trading strategy on a different asset. Furthermore, the **modularity** of the software design should facilitate changes to adapt the program to different requirements (i.e. different data or ML models).
 
 &nbsp;
+### Strategy Backtesting Results
+
+The Random Forest classifier model was trained and optimised with the **scikit-learn GridSearchCV** module. After computing the trading signals predictions and backtesting the strategy, the following performances were recorded:
 
 &nbsp;
 
-### Strategy Backtesting Results
+|                                  | Performance Indicators Summary |
+|----------------------------------|--------------------------------|
+| Return Buy and Hold (%)          | 273.94                         |
+| Return Buy and Hold Ann. (%)     | 91.5                           |
+| Return Trading Strategy (%)      | 1555.54                        |
+| Return Trading Strategy Ann. (%) | 298.53                         |
+| Sharpe Ratio                     | 0.85                           |
+| Hit Ratio (%)                    | 93.0                           |
+| Average Trades Profit (%)        | 3.99                           |
+| Average Trades Loss (%)          | -1.15                          |
+| Max Drawdown (%)                 | -7.69                          |
+| Days Max Drawdown Recovery       | 2                              |
 
-The Random Forest classifier model was trained and optimised with the **scikit-learn GridSearchCV** module. After computing the trading signals, the following performances were recorded:
-
+&nbsp;
 ![drawdown](https://user-images.githubusercontent.com/68741036/127544806-98215a1a-710d-408e-9073-e8d8a7c6bef7.png)
 
 ![returns](https://user-images.githubusercontent.com/68741036/127544828-a2a07608-7144-4f0d-b5f9-49ac807ef724.png)
 
 &nbsp;
+### Running the Program
+
+This is straightforward. There are very few variables and methods to initialise and call in order to run the whole program.  
+
+Let me illustrate it in the steps below:
+
+1. Provide the variables in `download_params`, a dictionary containing all the strategy and data downloading details.
+
+    ```python
+    download_params = {'ticker' : 'TSLA',
+                       'since' : '2010-06-29', 
+                       'until' : '2021-06-02',
+                       'twitter_scrape_by_account' : {'elonmusk': {'search_keyword' : '',
+                                                                   'by_hashtag' : False},
+                                                      'tesla': {'search_keyword' : '',
+                                                                'by_hashtag' : False},
+                                                      'WSJ' : {'search_keyword' : 'Tesla',
+                                                               'by_hashtag' : False},
+                                                      'Reuters' : {'search_keyword' : 'Tesla',
+                                                                   'by_hashtag' : False},
+                                                      'business': {'search_keyword' : 'Tesla',
+                                                                   'by_hashtag' : False},
+                                                      'CNBC': {'search_keyword' : 'Tesla',
+                                                               'by_hashtag' : False},
+                                                      'FinancialTimes' : {'search_keyword' : 'Tesla',
+                                                                          'by_hashtag' : True}},
+                       'twitter_scrape_by_most_popular' : {'all_twitter_1': {'search_keyword' : 'Tesla',
+                                                                           'max_tweets_per_day' : 30,
+                                                                           'by_hashtag' : True}},
+                       'language' : 'en'                                      
+                       }
+    ```
+<p>&nbsp;</p>
+2. Initialise an instance of the `Pipeline` class:
+
+    ```python
+    TSLA_data_pipeline = Pipeline()
+    ```
+<p>&nbsp;</p>
+3. Call the `run` method on the `Pipeline` instance:
+
+    ```python
+    TSLA_pipeline_outputs = TSLA_data_pipeline.run()
+    ```
+    
+    This will return a dictionary with the `Pipeline` functions outputs, which in this example has been assigned to     `TSLA_pipeline_outputs`. It will also print messages about the status and operations of the data downloading and manipulation process.
+<p>&nbsp;</p>
+4. Retrieve the path to the aggregated data to feed into the `Backtest_Strategy` class:
+
+    ```python
+    data = glob.glob('data/prices_TI_sentiment_scores/*')[0]
+    ```
+<p>&nbsp;</p>
+5. Initialise an instance of the `Backtest_Strategy` class with the `data` variable assigned in the previous step.
+
+    ```python
+    TSLA_backtest_strategy = Backtest_Strategy(data)
+    ```
+<p>&nbsp;</p>
+6. Call the `preprocess_data` method on the `Backtest_Strategy` instance:
+    
+    ```python
+    TSLA_backtest_strategy.preprocess_data()
+    ```
+    
+    This method will show a summary of the data preprocessing results such as missing values, infinite values, features statistics.
+
+<p>&nbsp;</p>
+From this point the program becomes interactive and the user is able to input data, save and delete files related to the training and testing of the Random Forest model, and proceed to display the strategy performances summary and graphs.
 
 &nbsp;
 
+7. Call the `train_model` method on the `Backtest_Strategy` instance:
+
+    ```python
+    TSLA_backtest_strategy.train_model()
+    ```
+    
+    Here you will be able to train the model with the **scikit-learn GridSearchCV** module, and also save and delete files with the model's parameters grid and best parameters found.
+<p>&nbsp;</p>
+8. Call the `test_model` method on the `Backtest_Strategy` instance:
+
+    ```python
+    TSLA_backtest_strategy.test_model()
+    ```
+    
+    This method will allow you test the model by selecting one of the model's best parameters files saved during the training process (or the "default_best_param.json" file created by default by the program, if no other file was saved by the user).
+    
+    Once the process is complete, it will display the testing summary metrics and graphs.
+    
+    If you are satisfied with the testing results, from here you can display the backtesting summary, which equates to call the next and last method below. In this case the program will also save a csv file with the data to compute the strategy performance metrics.
+<p>&nbsp;</p>
+9. Call the `strategy_performance` method on the `Backtest_Strategy` instance:
+
+    ```python
+    TSLA_backtest_strategy.strategy_performance()
+    ```
+    
+    This is the method to display the backtesting summary shown above in this document. Assuming a testing session has been completed and there is a csv file for computing the performance metrics, the program will display the backtesting results straight away using the existing csv file, which in turn is overwritten every time a testing process is completed. Otherwise it will prompt you to run a training/testing session first.
+
+&nbsp;
+#### Tips
+If the required data (historical prices and Twitter posts) have been already downloaded, the only long execution time you may encounter is during the model training: the larger the parameters grid search, the longer the time. I recommend that you start getting confident with the program by using the data already provided within the repo (backtesting on Tesla stock).
+
+This is because any downloading of new data on a significantly large period of time such to be reliable for the model training will likely require many hours, essentially due to the Twitter scraping process.
+
+That said, please be also aware that **as soon as you change the variables in the `download_params` dictionary and run the initialised `Pipeline` instance, all the existing data files will be overwritten.**. This is because the program recognise on its own the relevant data that need to be downloaded according to the parameters passed into `download_params`, and this is a deliberate choice behind the program design.
+
+That's all! Clone the repository and play with it. Any feedback welcome. 
+
+&nbsp;
 ### Disclaimer
 
 Please be aware that the content and results of this project do not represent financial advise. You should conduct your own research before trading or investing in the markets. Your capital is at risk.
 
 &nbsp;
-
-&nbsp;
-
 ### References
 
 - [Minna Castoe, "Predicting Stock Market Price Direction with Uncertainty Using Quantile Regression Forest", Uppsala University (2020)](https://www.diva-portal.org/smash/get/diva2:1503760/FULLTEXT02)

@@ -77,13 +77,17 @@ Let me illustrate it in the steps below:
                        'language' : 'en'                                      
                        }
     ```
+
 <p>&nbsp;</p>
+
 2. Initialise an instance of the `Pipeline` class:
 
     ```python
     TSLA_data_pipeline = Pipeline()
     ```
+
 <p>&nbsp;</p>
+
 3. Call the `run` method on the `Pipeline` instance:
 
     ```python
@@ -91,19 +95,25 @@ Let me illustrate it in the steps below:
     ```
     
     This will return a dictionary with the `Pipeline` functions outputs, which in this example has been assigned to     `TSLA_pipeline_outputs`. It will also print messages about the status and operations of the data downloading and manipulation process.
+
 <p>&nbsp;</p>
+
 4. Retrieve the path to the aggregated data to feed into the `Backtest_Strategy` class:
 
     ```python
     data = glob.glob('data/prices_TI_sentiment_scores/*')[0]
     ```
+
 <p>&nbsp;</p>
+
 5. Initialise an instance of the `Backtest_Strategy` class with the `data` variable assigned in the previous step.
 
     ```python
     TSLA_backtest_strategy = Backtest_Strategy(data)
     ```
+
 <p>&nbsp;</p>
+
 6. Call the `preprocess_data` method on the `Backtest_Strategy` instance:
     
     ```python
@@ -138,7 +148,9 @@ From this point the program becomes interactive and the user is able to input da
     Once the process is complete, it will display the testing summary metrics and graphs.
     
     If you are satisfied with the testing results, from here you can display the backtesting summary, which equates to call the next and last method below. In this case the program will also save a csv file with the data to compute the strategy performance metrics.
+
 <p>&nbsp;</p>
+
 9. Call the `strategy_performance` method on the `Backtest_Strategy` instance:
 
     ```python

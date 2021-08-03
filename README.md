@@ -1,10 +1,10 @@
 # Trading Tesla with Machine Learning and Sentiment Analysis
 
-An interactiive program to train a Random Forest classifier to predict Tesla daily prices using technical indicators and Twitter sentiment scores, backtesting the strategy and producing performance metrics.
+An interactive program to train a Random Forest Classifier to predict Tesla daily prices using technical indicators and sentiment scores of Twitter posts, backtesting the trading strategy and producing performance metrics.
 
 The project leverages techniques, paradigms and data structures such as:
 
-- Functional and Object Oriented Programming
+- Functional and Object-Oriented Programming
 - Machine Learning
 - Sentiment Analysis
 - Concurrency and Parallel Processing
@@ -104,7 +104,7 @@ Let me illustrate it in the steps below:
     
     This method will show a summary of the data preprocessing results such as missing values, infinite values and features statistics.
 
-From this point the program becomes interactive and the user is able to input data, save and delete files related to the training and testing of the Random Forest model, and proceed to display the strategy backtest summary and graphs.
+From this point the program becomes interactive, and the user is able to input data, save and delete files related to the training and testing of the Random Forest model, and proceed to display the strategy backtesting summary and graphs.
 
 7. Call the `train_model` method on the `Backtest_Strategy` instance:
 
@@ -120,11 +120,11 @@ From this point the program becomes interactive and the user is able to input da
     TSLA_backtest_strategy.test_model()
     ```
     
-    This method will allow you test the model by selecting one of the model's best parameters files saved during the training process (or the "default_best_param.json" file created by default by the program, if no other file was saved by the user).
+    This method will allow you to test the model by selecting one of the model's best parameters files saved during the training process (or the "default_best_param.json" file created by default by the program, if no other file was saved by the user).
     
     Once the process is complete, it will display the testing summary metrics and graphs.
     
-    If you are satisfied with the testing results, from here you can display the backtesting summary, which equates to call the next and last method below. In this case the program will also save a csv file with the data to compute the strategy performance metrics.
+    If you are satisfied with the testing results, from here you can display the backtesting summary, which equates to call the next and last method below. In this case, the program will also save a csv file with the data to compute the strategy performance metrics.
 
 9. Call the `strategy_performance` method on the `Backtest_Strategy` instance:
 
@@ -132,7 +132,7 @@ From this point the program becomes interactive and the user is able to input da
     TSLA_backtest_strategy.strategy_performance()
     ```
     
-    This is the method to display the backtesting summary shown above in this document. Assuming a testing session has been completed and there is a csv file for computing the performance metrics, the program will display the backtesting results straight away using the existing csv file, which in turn is overwritten every time a testing process is completed. Otherwise it will prompt you to run a training/testing session first.
+    This is the method to display the backtesting summary shown above in this document. Assuming a testing session has been completed and there is a csv file for computing the performance metrics, the program will display the backtesting results straight away using the existing csv file, which in turn is overwritten every time a testing process is completed. Otherwise, it will prompt you to run a training/testing session first.
 
 ### Tips
 If the required data (historical prices and Twitter posts) have been already downloaded, the only long execution time you may encounter is during the model training: the larger the parameters grid search, the longer the time. I recommend that you start getting confident with the program by using the data already provided within the repo (backtesting on Tesla stock).
@@ -145,7 +145,7 @@ That's all! Clone the repository and play with it. Any feedback welcome.
 
 ## Disclaimer
 
-Please be aware that the content and results of this project do not represent financial advise. You should conduct your own research before trading or investing in the markets. Your capital is at risk.
+Please be aware that the content and results of this project do not represent financial advice. You should conduct your own research before trading or investing in the markets. Your capital is at risk.
 
 ## References
 

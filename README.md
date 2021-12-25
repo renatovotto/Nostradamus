@@ -34,9 +34,11 @@ The Random Forest classifier model was trained and optimised with the **scikit-l
 | Max Drawdown (%)                 | -1.42                          |
 | Days Max Drawdown Recovery       | 2                              |
 
-![drawdown](https://user-images.githubusercontent.com/68741036/127544806-98215a1a-710d-408e-9073-e8d8a7c6bef7.png)
+![drawdown](https://user-images.githubusercontent.com/68741036/147393750-5349357a-6dd8-4a01-8f47-97a0f4d45917.png)
 
-![returns](https://user-images.githubusercontent.com/68741036/127544828-a2a07608-7144-4f0d-b5f9-49ac807ef724.png)
+![equity](https://user-images.githubusercontent.com/68741036/147393776-762dd7c5-5aa8-47c2-aad9-670ad066bed4.png)
+
+By trading the 20% of the capital at each trade and with a transaction fee of 0.05%, the trading strategy outperforms the return of the simple investment in the stock on the same period, with a return of 24 times the initial capital compared to the return of 1547% of the stock.
 
 ## Running the Program
 
@@ -130,10 +132,10 @@ From this point the program becomes interactive, and the user is able to input d
 9. Call the `strategy_performance` method on the `Backtest_Strategy` instance:
 
     ```python
-    TSLA_backtest_strategy.strategy_performance()
+    TSLA_backtest_strategy.strategy_performance(initial_capital=10000, traded_amount_pc=20, transaction_fee=0.05)
     ```
     
-    This is the method to display the backtesting summary shown above in this document. Assuming a testing session has been completed and there is a csv file for computing the performance metrics, the program will display the backtesting results straight away using the existing csv file, which in turn is overwritten every time a testing process is completed. Otherwise, it will prompt you to run a training/testing session first.
+    This is the method to display the backtesting summary shown above in this document. You'll need to provide some parameters: the initial capital, the fraction of the capital traded at each position, and the transaction cost; the latter can be a percentage or an absolute value, the method allows you to define this (by default it assumes fees as percentage of the amount traded). Assuming a testing session has been completed and there is a csv file for computing the performance metrics, the program will display the backtesting results straight away using the existing csv file, which in turn is overwritten every time a testing process is completed. Otherwise, it will prompt you to run a training/testing session first.
 
 ### Tips
 If the required data (historical prices and Twitter posts) have been already downloaded, the only long execution time you may encounter is during the model training: the larger the parameters grid search, the longer the time. I recommend that you start getting confident with the program by using the data already provided within the repo (backtesting on Tesla stock).

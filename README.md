@@ -18,19 +18,20 @@ The intention behind this project was to implement the end-to-end workflow of th
 
 ## Strategy Backtesting Results
 
-The Random Forest classifier model was trained and optimised with the **scikit-learn GridSearchCV** module. After computing the trading signals predictions and backtesting the strategy, the following performances were recorded:
+The Random Forest classifier model was trained and optimised with the **scikit-learn GridSearchCV** module. After computing the trading signals predictions and backtesting of the strategy, the following performances were recorded:
 
 |                                  | Performance Indicators Summary |
 |----------------------------------|--------------------------------|
-| Return Buy and Hold (%)          | 273.94                         |
-| Return Buy and Hold Ann. (%)     | 91.5                           |
-| Return Trading Strategy (%)      | 1555.54                        |
-| Return Trading Strategy Ann. (%) | 298.53                         |
-| Sharpe Ratio                     | 0.85                           |
-| Hit Ratio (%)                    | 93.0                           |
-| Average Trades Profit (%)        | 3.99                           |
-| Average Trades Loss (%)          | -1.15                          |
-| Max Drawdown (%)                 | -7.69                          |
+| Return Buy and Hold (%)          | 1547.7                         |
+| Return Buy and Hold Ann. (%)     | 297.6                          |
+| Return Trading Strategy (%)      | 2411.95                        |
+| Return Trading Strategy Ann. (%) | 389.4                          |
+| Sharpe Ratio Ann.                | 17.74                          |
+| Total Number of Trades           | 251                            |
+| Hit Ratio (%)                    | 93.63                          |
+| Average Trades Profit (%)        | 1.07                           |
+| Average Trades Loss (%)          | -0.14                          |
+| Max Drawdown (%)                 | -1.42                          |
 | Days Max Drawdown Recovery       | 2                              |
 
 ![drawdown](https://user-images.githubusercontent.com/68741036/127544806-98215a1a-710d-408e-9073-e8d8a7c6bef7.png)
